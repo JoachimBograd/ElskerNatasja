@@ -14,13 +14,18 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh; /* Fylder hele skærmen */
+            height: 100vh;
             overflow: hidden;
+            text-align: center;
             position: relative;
         }
+        h1 {
+            font-size: 2rem;
+            padding: 10px;
+        }
         button {
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
             background-color: #ff69b4;
             color: white;
             border: none;
@@ -34,12 +39,9 @@
             transform: scale(1.1);
         }
         p {
-            margin-top: 20px;
-            font-size: 20px;
+            margin-top: 1rem;
+            font-size: 1.2rem;
             color: #333;
-            text-align: center;
-            position: relative;
-            z-index: 10;
         }
         .image-container {
             position: absolute;
@@ -49,26 +51,28 @@
         }
         img {
             position: absolute;
-            width: 150px;
+            width: 15vw;
+            max-width: 120px;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        /* Placering af billeder */
-        #image1 { top: 5%; left: 31%; }
-        #image2 { top: 12%; right: 24%; }
-        #image3 { top: 30%; left: 15%; }
-        #image4 { bottom: 60%; right: 17%; }
-        #image5 { bottom: 4%; left: 50%; }
-        #image6 { bottom: 15%; right: 25%; }
-        #image7 { top: 60%; left: 28%; }
-        #image8 { bottom: 60%; right: 50%; }
-
-        /* Fly-up heart effect */
+        
+        /* Responsive image positioning */
+        #image1 { top: 5%; left: 10%; }
+        #image2 { top: 12%; right: 10%; }
+        #image3 { top: 30%; left: 5%; }
+        #image4 { bottom: 60%; right: 5%; }
+        #image5 { bottom: 4%; left: 50%; transform: translateX(-50%); }
+        #image6 { bottom: 15%; right: 15%; }
+        #image7 { top: 60%; left: 20%; }
+        #image8 { bottom: 60%; right: 40%; }
+        
+        /* Floating hearts animation */
         .heart {
             position: absolute;
             color: #ff69b4;
-            font-size: 24px;
+            font-size: 1.5rem;
             animation: flyUp 2s ease-out forwards;
             pointer-events: none;
             z-index: 1;
@@ -84,10 +88,18 @@
                 opacity: 0;
             }
         }
+        
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.5rem; }
+            button { font-size: 1rem; padding: 0.8rem 1.5rem; }
+            p { font-size: 1rem; }
+            img { width: 20vw; max-width: 100px; }
+        }
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;">Velkommen, min skat!</h1>
+    <h1>Velkommen, min skat!</h1>
     <div class="image-container">
         <img id="image1" src="image1.jpg" alt="Billede 1" />
         <img id="image2" src="image2.jpg" alt="Billede 2" />
@@ -97,46 +109,34 @@
         <img id="image6" src="image6.jpg" alt="Billede 6" />
         <img id="image7" src="image7.jpg" alt="Billede 7" />
         <img id="image8" src="image8.jpg" alt="Billede 8" />
-
     </div>
     <button id="loveButton">Giv mig kærlighed</button>
     <p id="message"></p>
 
-    <!-- Link til din script.js-fil -->
-    <script src="script.js"></script>
-
     <script>
-        // Integrate the heart effect with existing message logic
         document.getElementById("loveButton").addEventListener("click", function(event) {
             createHeartEffect(event.clientX, event.clientY);
-            // Let your existing script.js code handle the message logic
         });
-
+        document.getElementById("loveButton").addEventListener("touchstart", function(event) {
+            const touch = event.touches[0];
+            createHeartEffect(touch.clientX, touch.clientY);
+        });
+        
         function createHeartEffect(x, y) {
             const body = document.body;
-
-            // Random number of hearts (5 to 10)
             const numHearts = Math.floor(Math.random() * 6) + 5;
-
             for (let i = 0; i < numHearts; i++) {
                 const heart = document.createElement("div");
                 heart.innerText = "❤️";
                 heart.classList.add("heart");
-
-                // Random position near the click
+                
                 const offsetX = (Math.random() - 0.5) * 100;
                 const offsetY = (Math.random() - 0.5) * 50;
-
                 heart.style.left = x + offsetX + "px";
                 heart.style.top = y + offsetY + "px";
                 heart.style.fontSize = Math.random() * 10 + 20 + "px";
-
                 body.appendChild(heart);
-
-                // Remove the heart after the animation
-                setTimeout(() => {
-                    heart.remove();
-                }, 2000);
+                setTimeout(() => { heart.remove(); }, 2000);
             }
         }
     </script>
