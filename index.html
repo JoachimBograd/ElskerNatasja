@@ -109,7 +109,7 @@
             .top-images img, .bottom-images img {
                 display: inline-block;
             }
-            .middle-images {
+            .middle-images img {
                 display: none;
             }
         }
@@ -118,14 +118,20 @@
 <body>
     <h1 style="text-align: center;">Velkommen, min skat!</h1>
     <div class="image-container">
-        <img id="image1" src="image1.jpg" alt="Billede 1" />
-        <img id="image2" src="image2.jpg" alt="Billede 2" />
-        <img id="image3" src="image3.jpg" alt="Billede 3" />
-        <img id="image4" src="image4.jpg" alt="Billede 4" />
-        <img id="image5" src="image5.jpg" alt="Billede 5" />
-        <img id="image6" src="image6.jpg" alt="Billede 6" />
-        <img id="image7" src="image7.jpg" alt="Billede 7" />
-        <img id="image8" src="image8.jpg" alt="Billede 8" />
+        <div class="top-images">
+            <img id="image1" src="image1.jpg" alt="Billede 1" />
+            <img id="image2" src="image2.jpg" alt="Billede 2" />
+        </div>
+        <div class="middle-images">
+            <img id="image3" src="image3.jpg" alt="Billede 3" />
+            <img id="image4" src="image4.jpg" alt="Billede 4" />
+            <img id="image5" src="image5.jpg" alt="Billede 5" />
+            <img id="image6" src="image6.jpg" alt="Billede 6" />
+        </div>
+        <div class="bottom-images">
+            <img id="image7" src="image7.jpg" alt="Billede 7" />
+            <img id="image8" src="image8.jpg" alt="Billede 8" />
+        </div>
     </div>
     <button id="loveButton">Giv mig kærlighed</button>
     <p id="message"></p>
@@ -134,34 +140,23 @@
     <script src="script.js"></script>
 
     <script>
-        // Integrate the heart effect with existing message logic
         document.getElementById("loveButton").addEventListener("click", function(event) {
             createHeartEffect(event.clientX, event.clientY);
-            // Let your existing script.js code handle the message logic
         });
 
         function createHeartEffect(x, y) {
             const body = document.body;
-
-            // Random number of hearts (5 to 10)
             const numHearts = Math.floor(Math.random() * 6) + 5;
-
             for (let i = 0; i < numHearts; i++) {
                 const heart = document.createElement("div");
                 heart.innerText = "❤️";
                 heart.classList.add("heart");
-
-                // Random position near the click
                 const offsetX = (Math.random() - 0.5) * 100;
                 const offsetY = (Math.random() - 0.5) * 50;
-
                 heart.style.left = x + offsetX + "px";
                 heart.style.top = y + offsetY + "px";
                 heart.style.fontSize = Math.random() * 10 + 20 + "px";
-
                 body.appendChild(heart);
-
-                // Remove the heart after the animation
                 setTimeout(() => {
                     heart.remove();
                 }, 2000);
