@@ -14,7 +14,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: 100vh; /* Fylder hele skærmen */
             overflow: hidden;
             position: relative;
         }
@@ -54,6 +54,15 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        /* Placering af billeder */
+        #image1 { top: 5%; left: 31%; }
+        #image2 { top: 12%; right: 24%; }
+        #image3 { top: 30%; left: 15%; }
+        #image4 { bottom: 60%; right: 17%; }
+        #image5 { bottom: 4%; left: 50%; }
+        #image6 { bottom: 15%; right: 25%; }
+        #image7 { top: 60%; left: 28%; }
+        #image8 { bottom: 60%; right: 50%; }
 
         /* Fly-up heart effect */
         .heart {
@@ -75,6 +84,35 @@
                 opacity: 0;
             }
         }
+
+        /* Mobilvenlig visning med 2 billeder i top og 2 i bund */
+        @media (max-width: 768px) {
+            .image-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                height: 100vh;
+                padding: 10px 0;
+            }
+            .top-images, .bottom-images {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                padding: 0 10px;
+            }
+            img {
+                position: static;
+                width: 100px;
+                height: auto;
+            }
+            .top-images img, .bottom-images img {
+                display: inline-block;
+            }
+            .middle-images {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -92,6 +130,7 @@
     <button id="loveButton">Giv mig kærlighed</button>
     <p id="message"></p>
 
+    <!-- Link til din script.js-fil -->
     <script src="script.js"></script>
 
     <script>
