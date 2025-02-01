@@ -9,27 +9,18 @@
             font-family: Arial, sans-serif;
             background-color: #ffe4e1;
             margin: 0;
-            padding-top: 5rem; /* Add padding to prevent overlap */
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             overflow: hidden;
-            text-align: center;
             position: relative;
         }
-        h1 {
-            font-size: 2rem;
-            padding: 10px;
-            z-index: 15;
-            background-color: rgba(255, 228, 225, 0.8);
-            border-radius: 10px;
-            padding: 10px 20px;
-        }
         button {
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
+            padding: 15px 30px;
+            font-size: 18px;
             background-color: #ff69b4;
             color: white;
             border: none;
@@ -43,13 +34,12 @@
             transform: scale(1.1);
         }
         p {
-            margin-top: 1rem;
-            font-size: 1.2rem;
+            margin-top: 20px;
+            font-size: 20px;
             color: #333;
-            z-index: 15;
-            background-color: rgba(255, 228, 225, 0.8);
-            border-radius: 10px;
-            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
         }
         .image-container {
             position: absolute;
@@ -59,28 +49,44 @@
         }
         img {
             position: absolute;
-            width: 15vw;
-            max-width: 120px;
+            width: 150px;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        /* Placering af billeder */
+        #image1 { top: 5%; left: 31%; }
+        #image2 { top: 12%; right: 24%; }
+        #image3 { top: 30%; left: 15%; }
+        #image4 { bottom: 60%; right: 17%; }
+        #image5 { bottom: 4%; left: 50%; }
+        #image6 { bottom: 15%; right: 25%; }
+        #image7 { top: 60%; left: 28%; }
+        #image8 { bottom: 60%; right: 50%; }
         
-        /* Responsive image positioning */
-        #image1 { top: 10%; left: 10%; }
-        #image2 { top: 12%; right: 10%; }
-        #image3 { top: 35%; left: 5%; }
-        #image4 { bottom: 60%; right: 5%; }
-        #image5 { bottom: 10%; left: 50%; transform: translateX(-50%); }
-        #image6 { bottom: 20%; right: 15%; }
-        #image7 { top: 65%; left: 20%; }
-        #image8 { bottom: 60%; right: 40%; }
-        
-        /* Floating hearts animation */
+        /* Mobiltilpasning af billeder */
+        @media (max-width: 768px) {
+            .image-container img {
+                width: 100px;
+                position: static;
+                display: block;
+                margin: 10px auto;
+            }
+            .image-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                padding-bottom: 20px;
+            }
+        }
+
+        /* Fly-up heart effect */
         .heart {
             position: absolute;
             color: #ff69b4;
-            font-size: 1.5rem;
+            font-size: 24px;
             animation: flyUp 2s ease-out forwards;
             pointer-events: none;
             z-index: 1;
@@ -96,18 +102,10 @@
                 opacity: 0;
             }
         }
-        
-        /* Mobile adjustments */
-        @media (max-width: 768px) {
-            h1 { font-size: 1.5rem; }
-            button { font-size: 1rem; padding: 0.8rem 1.5rem; }
-            p { font-size: 1rem; }
-            img { width: 20vw; max-width: 100px; }
-        }
     </style>
 </head>
 <body>
-    <h1>Velkommen, min skat!</h1>
+    <h1 style="text-align: center;">Velkommen, min skat!</h1>
     <div class="image-container">
         <img id="image1" src="image1.jpg" alt="Billede 1" />
         <img id="image2" src="image2.jpg" alt="Billede 2" />
@@ -125,11 +123,7 @@
         document.getElementById("loveButton").addEventListener("click", function(event) {
             createHeartEffect(event.clientX, event.clientY);
         });
-        document.getElementById("loveButton").addEventListener("touchstart", function(event) {
-            const touch = event.touches[0];
-            createHeartEffect(touch.clientX, touch.clientY);
-        });
-        
+
         function createHeartEffect(x, y) {
             const body = document.body;
             const numHearts = Math.floor(Math.random() * 6) + 5;
@@ -137,7 +131,6 @@
                 const heart = document.createElement("div");
                 heart.innerText = "❤️";
                 heart.classList.add("heart");
-                
                 const offsetX = (Math.random() - 0.5) * 100;
                 const offsetY = (Math.random() - 0.5) * 50;
                 heart.style.left = x + offsetX + "px";
