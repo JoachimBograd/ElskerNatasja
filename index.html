@@ -64,15 +64,13 @@
         #image6 { bottom: 15%; right: 25%; }
         #image7 { top: 60%; left: 28%; }
         #image8 { bottom: 60%; right: 50%; }
-        #image9 { top: 20%; left: 40%; }
-        #image10 { bottom: 10%; right: 30%; }
 
-        /* Mobilvenlig visning */
+        /* Mobilvenlig visning med 2 billeder i top og bund */
         @media (max-width: 768px) {
             .image-container {
                 display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
+                flex-direction: column;
+                justify-content: space-between;
                 align-items: center;
                 height: 100vh;
                 padding: 10px 0;
@@ -81,6 +79,17 @@
                 position: static;
                 width: 100px;
                 margin: 5px;
+            }
+            #image1, #image2 {
+                position: static;
+                order: -1;
+            }
+            #image5, #image6 {
+                position: static;
+                order: 1;
+            }
+            #image3, #image4, #image7, #image8 {
+                display: none;
             }
         }
     </style>
@@ -96,8 +105,6 @@
         <img id="image6" src="image6.jpg" alt="Billede 6" />
         <img id="image7" src="image7.jpg" alt="Billede 7" />
         <img id="image8" src="image8.jpg" alt="Billede 8" />
-        <img id="image9" src="image9.jpg" alt="Billede 9" />
-        <img id="image10" src="image10.jpg" alt="Billede 10" />
     </div>
     <button id="loveButton">Giv mig kærlighed</button>
     <p id="message"></p>
