@@ -65,7 +65,7 @@
         #image7 { top: 60%; left: 28%; }
         #image8 { bottom: 60%; right: 50%; }
 
-        /* Mobilvenlig visning med 2 billeder i top og bund */
+        /* Mobilvenlig visning med 2 billeder i top og bund, side om side */
         @media (max-width: 768px) {
             .image-container {
                 display: flex;
@@ -75,18 +75,22 @@
                 height: 100vh;
                 padding: 10px 0;
             }
+            .top-images, .bottom-images {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                width: 100%;
+            }
             img {
                 position: static;
                 width: 100px;
-                margin: 5px;
+                height: auto;
             }
             #image1, #image2 {
                 position: static;
-                order: -1;
             }
             #image5, #image6 {
                 position: static;
-                order: 1;
             }
             #image3, #image4, #image7, #image8 {
                 display: none;
@@ -97,14 +101,14 @@
 <body>
     <h1 style="text-align: center;">Velkommen, min skat!</h1>
     <div class="image-container">
-        <img id="image1" src="image1.jpg" alt="Billede 1" />
-        <img id="image2" src="image2.jpg" alt="Billede 2" />
-        <img id="image3" src="image3.jpg" alt="Billede 3" />
-        <img id="image4" src="image4.jpg" alt="Billede 4" />
-        <img id="image5" src="image5.jpg" alt="Billede 5" />
-        <img id="image6" src="image6.jpg" alt="Billede 6" />
-        <img id="image7" src="image7.jpg" alt="Billede 7" />
-        <img id="image8" src="image8.jpg" alt="Billede 8" />
+        <div class="top-images">
+            <img id="image1" src="image1.jpg" alt="Billede 1" />
+            <img id="image2" src="image2.jpg" alt="Billede 2" />
+        </div>
+        <div class="bottom-images">
+            <img id="image5" src="image5.jpg" alt="Billede 5" />
+            <img id="image6" src="image6.jpg" alt="Billede 6" />
+        </div>
     </div>
     <button id="loveButton">Giv mig kærlighed</button>
     <p id="message"></p>
