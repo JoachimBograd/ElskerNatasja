@@ -14,7 +14,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            height: 100vh; /* Fylder hele skærmen */
             overflow: hidden;
             position: relative;
         }
@@ -63,24 +63,6 @@
         #image6 { bottom: 15%; right: 25%; }
         #image7 { top: 60%; left: 28%; }
         #image8 { bottom: 60%; right: 50%; }
-        
-        /* Mobiltilpasning af billeder */
-        @media (max-width: 768px) {
-            .image-container img {
-                width: 100px;
-                position: static;
-                display: block;
-                margin: 10px auto;
-            }
-            .image-container {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-                position: relative;
-                padding-bottom: 20px;
-            }
-        }
 
         /* Fly-up heart effect */
         .heart {
@@ -115,31 +97,50 @@
         <img id="image6" src="image6.jpg" alt="Billede 6" />
         <img id="image7" src="image7.jpg" alt="Billede 7" />
         <img id="image8" src="image8.jpg" alt="Billede 8" />
+
     </div>
     <button id="loveButton">Giv mig kærlighed</button>
     <p id="message"></p>
 
+    <!-- Link til din script.js-fil -->
+    <script src="script.js"></script>
+
     <script>
+        // Integrate the heart effect with existing message logic
         document.getElementById("loveButton").addEventListener("click", function(event) {
             createHeartEffect(event.clientX, event.clientY);
+            // Let your existing script.js code handle the message logic
         });
 
         function createHeartEffect(x, y) {
             const body = document.body;
+
+            // Random number of hearts (5 to 10)
             const numHearts = Math.floor(Math.random() * 6) + 5;
+
             for (let i = 0; i < numHearts; i++) {
                 const heart = document.createElement("div");
                 heart.innerText = "❤️";
                 heart.classList.add("heart");
+
+                // Random position near the click
                 const offsetX = (Math.random() - 0.5) * 100;
                 const offsetY = (Math.random() - 0.5) * 50;
+
                 heart.style.left = x + offsetX + "px";
                 heart.style.top = y + offsetY + "px";
                 heart.style.fontSize = Math.random() * 10 + 20 + "px";
+
                 body.appendChild(heart);
-                setTimeout(() => { heart.remove(); }, 2000);
+
+                // Remove the heart after the animation
+                setTimeout(() => {
+                    heart.remove();
+                }, 2000);
             }
         }
     </script>
 </body>
 </html>
+
+
