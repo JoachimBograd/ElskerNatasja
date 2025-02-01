@@ -54,22 +54,43 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        /* Heart effect styling */
-        .heart {
-            position: absolute;
-            color: red;
-            font-size: 24px;
-            opacity: 1;
-            animation: floatUp 2s ease-in-out forwards;
-        }
-        @keyframes floatUp {
-            0% {
-                transform: translateY(0) scale(1);
-                opacity: 1;
+
+        /* Placering af billeder på computer */
+        #image1 { top: 5%; left: 31%; }
+        #image2 { top: 12%; right: 24%; }
+        #image3 { top: 30%; left: 15%; }
+        #image4 { bottom: 60%; right: 17%; }
+        #image5 { bottom: 4%; left: 50%; }
+        #image6 { bottom: 15%; right: 25%; }
+        #image7 { top: 60%; left: 28%; }
+        #image8 { bottom: 60%; right: 50%; }
+
+        /* Mobilvenlig visning med 2 billeder i top og 2 i bund */
+        @media (max-width: 768px) {
+            .image-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                height: 100vh;
+                padding: 10px 0;
             }
-            100% {
-                transform: translateY(-50px) scale(1.5);
-                opacity: 0;
+            .top-images, .bottom-images {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                padding: 0 10px;
+            }
+            img {
+                position: static;
+                width: 100px;
+                height: auto;
+            }
+            .top-images img, .bottom-images img {
+                display: inline-block;
+            }
+            .middle-images {
+                display: none;
             }
         }
     </style>
@@ -77,32 +98,45 @@
 <body>
     <h1 style="text-align: center;">Velkommen, min skat!</h1>
     <div class="image-container">
-        <img id="image1" src="image1.jpg" alt="Billede 1" />
-        <img id="image2" src="image2.jpg" alt="Billede 2" />
-        <img id="image3" src="image3.jpg" alt="Billede 3" />
-        <img id="image4" src="image4.jpg" alt="Billede 4" />
-        <img id="image5" src="image5.jpg" alt="Billede 5" />
-        <img id="image6" src="image6.jpg" alt="Billede 6" />
-        <img id="image7" src="image7.jpg" alt="Billede 7" />
-        <img id="image8" src="image8.jpg" alt="Billede 8" />
+        <div class="top-images">
+            <img id="image1" src="image1.jpg" alt="Billede 1" />
+            <img id="image2" src="image2.jpg" alt="Billede 2" />
+        </div>
+        <div class="middle-images">
+            <img id="image3" src="image3.jpg" alt="Billede 3" />
+            <img id="image4" src="image4.jpg" alt="Billede 4" />
+            <img id="image7" src="image7.jpg" alt="Billede 7" />
+            <img id="image8" src="image8.jpg" alt="Billede 8" />
+        </div>
+        <div class="bottom-images">
+            <img id="image5" src="image5.jpg" alt="Billede 5" />
+            <img id="image6" src="image6.jpg" alt="Billede 6" />
+        </div>
     </div>
     <button id="loveButton">Giv mig kærlighed</button>
     <p id="message"></p>
 
+    <script src="script.js"></script>
+
     <script>
+        // Integrate the heart effect with existing message logic
         document.getElementById("loveButton").addEventListener("click", function(event) {
             createHeartEffect(event.clientX, event.clientY);
+            // Let your existing script.js code handle the message logic
         });
 
         function createHeartEffect(x, y) {
             const body = document.body;
+
+            // Random number of hearts (5 to 10)
             const numHearts = Math.floor(Math.random() * 6) + 5;
-            
+
             for (let i = 0; i < numHearts; i++) {
                 const heart = document.createElement("div");
                 heart.innerText = "❤️";
                 heart.classList.add("heart");
 
+                // Random position near the click
                 const offsetX = (Math.random() - 0.5) * 100;
                 const offsetY = (Math.random() - 0.5) * 50;
 
@@ -112,12 +146,12 @@
 
                 body.appendChild(heart);
 
+                // Remove the heart after the animation
                 setTimeout(() => {
                     heart.remove();
                 }, 2000);
             }
         }
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
